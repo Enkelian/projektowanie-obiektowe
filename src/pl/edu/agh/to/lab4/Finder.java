@@ -1,61 +1,38 @@
 package pl.edu.agh.to.lab4;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 public class Finder {
-    private final Collection<CracovCitizen> allCracovCitizens;
 
-    private final Map<String, Collection<Prisoner>> allPrisoners;
+    private CompositeAggregate compositeAggregate = new CompositeAggregate();
 
-    public Finder(Collection<CracovCitizen> allCracovCitizens, Map<String, Collection<Prisoner>> allPrisoners) {
-        this.allCracovCitizens = allCracovCitizens;
-        this.allPrisoners = allPrisoners;
-    }
 
     public Finder(PersonDataProvider personDataProvider, PrisonersDatabase prisonersDatabase) {
-        this(personDataProvider.getAllCracovCitizens(), prisonersDatabase.findAll());
+        this.compositeAggregate.addAggregate(personDataProvider);
+        this.compositeAggregate.addAggregate(prisonersDatabase);
     }
 
     public void displayAllSuspectsWithName(String name) {
-        ArrayList<Prisoner> suspectedPrisoners = new ArrayList<Prisoner>();
-        ArrayList<CracovCitizen> suspectedCracovCitizens = new ArrayList<CracovCitizen>();
 
-        for (Collection<Prisoner> prisonerCollection : allPrisoners.values()) {
-            for (Prisoner prisoner : prisonerCollection) {
-                if (!prisoner.isJailedNow() && prisoner.getFirstname().equals(name)) {
-                    suspectedPrisoners.add(prisoner);
-                }
-                if (suspectedPrisoners.size() >= 10) {
-                    break;
-                }
+        List<Suspect> suspects = new ArrayList<Suspect>();
+
+        CompositeSearchStrategy compositeSearchStrategy = new CompositeSearchStrategy();
+        compositeSearchStrategy.addSearchStrategy(new NameSearchStrategy(name));
+        compositeSearchStrategy.addSearchStrategy(new AgeSearchStrategy(18));
+
+        for(Iterator<? extends Suspect> it = this.compositeAggregate.getIterator(); it.hasNext();){
+            Suspect suspect = it.next();
+            if(suspect.canBeAccused() && compositeSearchStrategy.filter(suspect)){
+                suspects.add(suspect);
             }
-            if (suspectedPrisoners.size() >= 10) {
-                break;
-            }
+
         }
 
-        if (suspectedPrisoners.size() < 10) {
-            for (CracovCitizen cracovCitizen : allCracovCitizens) {
-                if (cracovCitizen.getAge() > 18 && cracovCitizen.getFirstname().equals(name)) {
-                    suspectedCracovCitizens.add(cracovCitizen);
-                }
-                if (suspectedPrisoners.size() + suspectedCracovCitizens.size() >= 10) {
-                    break;
-                }
-            }
-        }
-
-        int t = suspectedPrisoners.size() + suspectedCracovCitizens.size();
+        int t = suspects.size();
         System.out.println("Znalazlem " + t + " pasujacych podejrzanych!");
 
-        for (Prisoner n : suspectedPrisoners) {
+        for (Suspect n : suspects) {
             System.out.println(n.display());
-        }
-
-        for (CracovCitizen p : suspectedCracovCitizens) {
-            System.out.println(p.display());
         }
     }
 }

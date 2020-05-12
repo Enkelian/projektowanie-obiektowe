@@ -20,4 +20,10 @@ public abstract class Suspect {
     public String display() {
         return firstname + " " + lastname;
     }
+
+    public abstract boolean canBeAccused();
+
+    public abstract int getAge();
+
+
 }

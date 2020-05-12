@@ -1,11 +1,9 @@
 package pl.edu.agh.to.lab4;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
-public class PrisonersDatabase {
+import java.util.*;
+
+public class PrisonersDatabase implements SuspectAggregate{
 
     private final Map<String, Collection<Prisoner>> prisoners = new HashMap<String, Collection<Prisoner>>();
 
@@ -33,4 +31,10 @@ public class PrisonersDatabase {
             prisoners.put(category, new ArrayList<Prisoner>());
         prisoners.get(category).add(prisoner);
     }
+
+    @Override
+    public Iterator<? extends Suspect> getIterator() {
+        return new FlatIterator(this.prisoners);
+    }
+
 }
