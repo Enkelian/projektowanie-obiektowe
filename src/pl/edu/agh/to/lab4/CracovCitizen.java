@@ -1,13 +1,13 @@
 package pl.edu.agh.to.lab4;
 
-public class Person {
-    private String firstname;
+public class CracovCitizen {
+    private final String firstname;
 
-    private String lastname;
+    private final String lastname;
 
     private int age;
 
-    public Person(String firstname, String lastname, int age) {
+    public CracovCitizen(String firstname, String lastname, int age) {
         this.age = age;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -17,12 +17,12 @@ public class Person {
         return age;
     }
 
-    public String firstname() {
-        return firstname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public String middlename() {
-        return lastname;
+    public String getFirstname() {
+        return firstname;
     }
 
     public String display() {

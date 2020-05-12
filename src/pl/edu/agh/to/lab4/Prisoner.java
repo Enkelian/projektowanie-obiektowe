@@ -9,9 +9,9 @@ public class Prisoner {
 
     private final String pesel;
 
-    public final String name;
+    private final String name;
 
-    public final String surname;
+    private final String surname;
 
     public Prisoner(String name, String surname, String pesel, int judgementYear, int sentenceDuration) {
         this.name = name;
@@ -25,11 +25,21 @@ public class Prisoner {
         return pesel;
     }
 
-    public boolean czyMoglbyEwentualnieBycPodejrzany() {
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public boolean isJailedNow() {
         return judgementYear + senteceDuration >= getCurrentYear();
     }
 
-    public int getCurrentYear() {
+    public String display() {return name+" "+surname;}
+
+    private int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
 }
