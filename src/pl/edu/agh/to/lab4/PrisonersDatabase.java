@@ -33,8 +33,4 @@ public class PrisonersDatabase {
             prisoners.put(category, new ArrayList<Prisoner>());
         prisoners.get(category).add(prisoner);
     }
-
-    public static String render(Prisoner prisoner) {
-        return prisoner.name + " " + prisoner.surname;
-    }
 }

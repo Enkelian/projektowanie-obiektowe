@@ -19,11 +19,11 @@ public class FinderTest {
 
     private PrintStream originalOut;
 
-    private Collection<Person> allPersons = new ArrayList<Person>();
+    private Collection<CracovCitizen> allCracovCitizens = new ArrayList<CracovCitizen>();
 
     private Map<String, Collection<Prisoner>> allPrisoners = new HashMap<String, Collection<Prisoner>>();
 
-    private Finder suspectFinder = new Finder(allPersons, allPrisoners);
+    private Finder suspectFinder = new Finder(allCracovCitizens, allPrisoners);
 
     @Test
     public void testDisplayingNotJailedPrisoner() {
@@ -34,21 +34,21 @@ public class FinderTest {
 
     @Test
     public void testDisplayingSuspectedPerson() {
-        allPersons.add(new Person("Jan", "Kowalski", 20));
+        allCracovCitizens.add(new CracovCitizen("Jan", "Kowalski", 20));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsDisplayed("Jan Kowalski");
     }
 
     @Test
     public void testNotDisplayingTooYoungPerson() {
-        allPersons.add(new Person("Jan", "Kowalski", 15));
+        allCracovCitizens.add(new CracovCitizen("Jan", "Kowalski", 15));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsNotDisplayed("Jan Kowalski");
     }
 
     @Test
     public void testNotDisplayingJailedPrisoner() {
-        allPersons.add(new Person("Jan", "Kowalski", 20));
+        allCracovCitizens.add(new CracovCitizen("Jan", "Kowalski", 20));
         addPrisoner("Wiezeienie stanowe", new Prisoner("Jan", "Kowalski2", "802104543357", 2000, 20));
         suspectFinder.displayAllSuspectsWithName("Jan");
         assertContentIsNotDisplayed("Jan Kowalski2");
