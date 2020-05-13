@@ -12,13 +12,13 @@ public class Finder {
         this.compositeAggregate.addAggregate(prisonersDatabase);
     }
 
-    public Collection displayAllSuspectsWithName(String name) {
+    public Collection displayAllSuspectsWithName(String name, int age) {
 
         List<Suspect> suspects = new ArrayList<Suspect>();
 
         CompositeSearchStrategy compositeSearchStrategy = new CompositeSearchStrategy();
         compositeSearchStrategy.addSearchStrategy(new NameSearchStrategy(name));
-        compositeSearchStrategy.addSearchStrategy(new AgeSearchStrategy(18));
+        compositeSearchStrategy.addSearchStrategy(new AgeSearchStrategy(age));
 
         for(Iterator<? extends Suspect> it = this.compositeAggregate.getIterator(); it.hasNext();){
             Suspect suspect = it.next();

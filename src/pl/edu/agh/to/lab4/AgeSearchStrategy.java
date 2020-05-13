@@ -11,7 +11,7 @@ public class AgeSearchStrategy implements SearchStrategy {
 
     @Override
     public boolean filter(Suspect suspect) {
-        return suspect.getAge() == 0 || suspect.getAge() >= age;
+        return suspect.getAge() == 0 || suspect.getAge() == age;
     }
 
     public int getAge() { return age; }
