@@ -12,7 +12,7 @@ public class Finder {
         this.compositeAggregate.addAggregate(prisonersDatabase);
     }
 
-    public void displayAllSuspectsWithName(String name) {
+    public Collection displayAllSuspectsWithName(String name) {
 
         List<Suspect> suspects = new ArrayList<Suspect>();
 
@@ -22,8 +22,10 @@ public class Finder {
 
         for(Iterator<? extends Suspect> it = this.compositeAggregate.getIterator(); it.hasNext();){
             Suspect suspect = it.next();
+
             if(suspect.canBeAccused() && compositeSearchStrategy.filter(suspect)){
                 suspects.add(suspect);
+
             }
 
         }
@@ -34,5 +36,7 @@ public class Finder {
         for (Suspect n : suspects) {
             System.out.println(n.display());
         }
+
+        return suspects;
     }
 }

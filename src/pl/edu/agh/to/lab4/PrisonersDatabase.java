@@ -18,6 +18,8 @@ public class PrisonersDatabase implements SuspectAggregate{
         addPrisoner("Wiezienie centralne", new Prisoner("Janusz", "Podejrzany", "85121212456", 2012, 1));
     }
 
+
+
     public Map<String, Collection<Prisoner>> findAll() {
         return prisoners;
     }
@@ -26,7 +28,7 @@ public class PrisonersDatabase implements SuspectAggregate{
         return prisoners.keySet();
     }
 
-    private void addPrisoner(String category, Prisoner prisoner) {
+    public void addPrisoner(String category, Prisoner prisoner) {
         if (!prisoners.containsKey(category))
             prisoners.put(category, new ArrayList<Prisoner>());
         prisoners.get(category).add(prisoner);

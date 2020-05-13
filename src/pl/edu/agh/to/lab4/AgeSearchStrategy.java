@@ -2,7 +2,7 @@ package pl.edu.agh.to.lab4;
 
 public class AgeSearchStrategy implements SearchStrategy {
 
-    private int     age;
+    private int age;
 
     public AgeSearchStrategy(int age) {
         this.age = age;
@@ -11,15 +11,10 @@ public class AgeSearchStrategy implements SearchStrategy {
 
     @Override
     public boolean filter(Suspect suspect) {
-        if(suspect instanceof CracovCitizen){
-            return ((CracovCitizen) suspect).getAge() == age;
-        }
-        return true;
+        return suspect.getAge() == 0 || suspect.getAge() >= age;
     }
 
-    public int getAge() {
-        return age;
-    }
+    public int getAge() { return age; }
 
     public void setAge(int age) {
         this.age = age;

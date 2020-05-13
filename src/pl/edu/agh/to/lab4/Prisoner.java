@@ -33,7 +33,5 @@ public class Prisoner extends Suspect{
         return !this.isJailedNow();
     }
 
-    @Override
-    public int getAge(){ return 100; }
 
 }

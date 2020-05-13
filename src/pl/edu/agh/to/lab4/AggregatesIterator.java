@@ -15,7 +15,7 @@ public class AggregatesIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return this.suspectIterator.hasNext() && this.compositeIterator.hasNext();
+        return this.suspectIterator.hasNext() || this.compositeIterator.hasNext();
     }
 
     @Override

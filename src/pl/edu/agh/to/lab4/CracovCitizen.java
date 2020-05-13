@@ -1,19 +1,14 @@
 package pl.edu.agh.to.lab4;
 
 public class CracovCitizen extends Suspect{
-    private int age;
+
 
     public CracovCitizen(String firstname, String lastname, int age) {
-        super(firstname, lastname);
-        this.age = age;
-    }
-
-    public int getAge() {
-        return age;
+        super(firstname, lastname, age);
     }
 
     public boolean canBeAccused(){
-        return this.getAge() >= 18;
+        return this.age >= 18;
     }
 
 }
